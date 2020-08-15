@@ -26,3 +26,10 @@ Classes
  * Logistic Regression
  * Naive Bayes
  * KNN
+
+## Preprocessing
+* Selecting duration, station (start and end ids), class (member, casual) (NOT GOOD ENOUGH)
+1. 645 rows dropped cause of null contents
+2. KNN accu : 63.3 
+3. NB accu : 49.71
+4. LR accu : 65.03
