@@ -20,8 +20,8 @@ NOTE: The 3-Day Membership replaced the 5-Day Membership in Fall 2011
 
 ## Classification Algo
 Classes 
-1. Registered
-2. Casual
+1. Registered (member)
+2. Casual (casual)
 
  * Logistic Regression
  * Naive Bayes
