@@ -1,26 +1,30 @@
 import pandas as pd
-from sklearn import metrics
-from sklearn.metrics import classification_report
+from joblib import load, dump
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
-
-df = pd.read_csv("duration_cal_preprocessed.csv", header=1)
-# df.head()
-
-# df.hist()
-# plt.show()
-
-X = df.iloc[:, [0, 1, 2]].values
-y = df.iloc[:, -1].values
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=0)
-
 from sklearn.neighbors import KNeighborsClassifier
 
-clf = KNeighborsClassifier(n_neighbors=5)
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
+# """Data set reading"""
+df = pd.read_csv("processed_dataset/2018_01_02_preprocessed.csv", header=1, low_memory=False, )
 
-# Find Score
-score = metrics.accuracy_score(y_test, y_pred)
-print("Accuracy of our model is: {:.1f}%".format(score * 100))
-print(classification_report(y_test, y_pred))
+X = df.iloc[:10000, [0, 1, 2]].values
+y = df.iloc[:10000, -1].values
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
+
+
+# Training model using sk learn classifier
+def train_model():
+    clf = KNeighborsClassifier(n_neighbors=19)
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+    print("Accuracy with inbuilt :: ", accuracy_score(y_test, y_pred) * 100)
+    dump(clf, './model/knn_model_inbuilt_k_19.joblib')
+    print("Model saved.................")
+
+
+# Predicting using the saved model
+def predict_load_model(X_test):
+    clf = load('./model/knn_model_inbuilt_k_19.joblib')
+    predictions = clf.predict(X_test)
+    return predictions

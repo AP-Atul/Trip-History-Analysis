@@ -3,7 +3,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split
 
-df = pd.read_csv("duration_cal_preprocessed.csv", header=1)
+df = pd.read_csv("processed_dataset/2018_01_02_preprocessed.csv", header=1)
 # df.head()
 
 # df.hist()
@@ -18,6 +18,10 @@ model = LogisticRegression()
 model.fit(X_train, y_train)
 
 predictions = model.predict(X_test)
+
+df = pd.DataFrame(predictions)
+df.to_csv("prediction_lg.csv", index=True)
+
 print(accuracy_score(y_test, predictions))
 classification_report(y_test, predictions)
 print(confusion_matrix(y_test, predictions))

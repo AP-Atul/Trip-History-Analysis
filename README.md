@@ -28,8 +28,13 @@ Classes
  * KNN
 
 ## Preprocessing
-* Selecting duration, station (start and end ids), class (member, casual) (NOT GOOD ENOUGH)
-1. 645 rows dropped cause of null contents
-2. KNN accu : 63.3 
-3. NB accu : 49.71
-4. LR accu : 65.03
+* Selecting duration, station (start and end ids), class (member, casual)
+1. KNN accu : 90+
+2. NB accu : 90+
+3. LR accu : 90+
+
+## Directory details
+1. processed_dataset/ : processed csv file
+2. charts : plots to visualize data
+3. lib : custom implementations of all the algos
+4. model : saved pre-trained model 
