@@ -1,14 +1,16 @@
 import pandas as pd
 from joblib import load, dump
+from matplotlib import pyplot as plt
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import plot_confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
 # """Data set reading"""
 df = pd.read_csv("processed_dataset/2018_01_02_preprocessed.csv", header=1, low_memory=False, )
 
-X = df.iloc[:10000, [0, 1, 2]].values
-y = df.iloc[:10000, -1].values
+X = df.iloc[:, [0, 1, 2]].values
+y = df.iloc[:, -1].values
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, random_state=0)
 
@@ -27,4 +29,10 @@ def train_model():
 def predict_load_model(X_test):
     clf = load('./model/knn_model_inbuilt_k_19.joblib')
     predictions = clf.predict(X_test)
+
+    plot_confusion_matrix(clf, X_test, predictions)
+    plt.show()
     return predictions
+
+# train_model()
+# predict_load_model(X_test)
