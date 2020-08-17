@@ -16,26 +16,27 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random
 
 # train the model with inbuilt classifier
 def train():
-    model = LogisticRegression()
+    model = LogisticRegression(n_jobs=-1)
     model.fit(X_train, y_train)
 
     predictions = model.predict(X_test)
     print(accuracy_score(y_test, predictions))
-    dump(model, './model/lr_model_inbuilt.joblib')
+    dump(model, 'model/lr_model_inbuilt.joblib')
     print('Model saved')
 
 
 # do prediction from the saved model
-def prediction(data):
-    model = load('./model/lr_model_inbuilt.joblib')
+def prediction(data, plot=True):
+    model = load('model/lr_model_inbuilt.joblib')
     predictions = model.predict(data)
 
-    plot_confusion_matrix(model, data, predictions)
-    plt.show()
-
+    if plot:
+        plot_confusion_matrix(model, data, predictions)
+        plt.show()
     return predictions
 
 # train()
-# prediction(X_test)
+# y_pred = prediction(X_test)
+# print(accuracy_score(y_test, y_pred))
 # classification_report(y_test, predictions)
 # print(confusion_matrix(y_test, predictions))

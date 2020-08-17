@@ -29,9 +29,18 @@ Classes
 
 ## Preprocessing
 * Selecting duration, station (start and end ids), class (member, casual)
-1. KNN accu : 90+
-2. NB accu : 90+
-3. LR accu : 90+
+(These are the saved models accuracies)
+1. KNN accuracy: 
+    * Custom : 95.15
+    * SKLearn : 91.30
+
+2. NB accuracy:
+    * Custom : 89.90
+    * SKLearn : 91.45
+
+3. LR accuracy:
+    * Custom : 88.71
+    * SKLearn : 90.17
 
 ## Directory details
 1. processed_dataset/ : processed csv file

@@ -15,17 +15,23 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.40, random
 
 
 # Training the model from the data set
-def train_model():
+def train():
     clf = KNN()
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test, k=5)
     print("Accuracy with inbuilt :: ", accuracy_score(y_test, y_pred) * 100)
-    dump(clf, './model/knn_model_custom_train_k_5.joblib')
+    dump(clf, 'model/knn_model_custom_train_k_5.joblib')
     print("Model saved.................")
 
 
 # Predicting using the saved model
-def predict_load_model(test_data):
-    clf = load('./model/knn_model_inbuilt_k_19.joblib')
+def prediction(test_data):
+    clf = load('model/knn_model_inbuilt_k_19.joblib')
     predictions = clf.predict(test_data)
     return predictions
+
+# train()
+# y_pred = prediction(X_test)
+# print(accuracy_score(y_test, y_pred))
+# classification_report(y_test, predictions)
+# print(confusion_matrix(y_test, predictions))

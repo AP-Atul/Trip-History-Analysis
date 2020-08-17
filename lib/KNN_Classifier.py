@@ -6,10 +6,23 @@ from tqdm import tqdm
 
 class KNN:
     def fit(self, X_train, Y_train):
+        """
+        KNN does not have any training phase so
+        just initialization
+        :param X_train: training data
+        :param Y_train: training labels
+        :return: updates the classifier
+        """
         self.X_train = X_train
         self.Y_train = Y_train
 
     def predict(self, X_test, k=5):
+        """
+        function to predict from the training data
+        :param X_test: test data
+        :param k: neighbours count
+        :return: list of predictions
+        """
         predictions = []
         for row in tqdm(X_test):
             label = self.closest(row, k)
@@ -17,6 +30,12 @@ class KNN:
         return predictions
 
     def closest(self, row, k):
+        """
+        function to do actual predict for each data
+        :param row: single list
+        :param k: neighbours count
+        :return: prediction a single label(0 /1)
+        """
         distances = []
         for i in range(len(self.X_train)):
             distances.append((i, distance.euclidean(row, self.X_train[i])))

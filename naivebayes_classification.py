@@ -1,31 +1,39 @@
 import pandas as pd
-from sklearn.metrics import accuracy_score
+from joblib import dump, load
+from matplotlib import pyplot as plt
+from sklearn.metrics import accuracy_score, plot_confusion_matrix
 from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
 
 df = pd.read_csv("processed_dataset/2018_01_02_preprocessed.csv", header=1)
-# df.head()
-
-# df.hist()
-# plt.show()
 
 X = df.iloc[:, [0, 1, 2]].values
 y = df.iloc[:, -1].values
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, random_state=0)
 
-from sklearn.naive_bayes import GaussianNB
 
-nv = GaussianNB()  # create a classifier
-nv.fit(X_train, y_train)
+# Training model using sk learn classifier
+def train_model():
+    clf = GaussianNB()
+    clf.fit(X_train, y_train)
 
-y_pred = nv.predict(X_test)  # store the prediction data
-print("Naive Bayesr score :: ", accuracy_score(y_test, y_pred) * 100)
-#
-# df = pd.DataFrame(y_pred)
-# df.to_csv("prediction_nb.csv", index=True)
-# print(accuracy_score(y_test, y_pred) * 100)
+    y_pred = clf.predict(X_test)
+    print("Accuracy with inbuilt :: ", accuracy_score(y_test, y_pred) * 100)
+    dump(clf, 'model/nb_model_inbuilt.joblib')
+    print("Model saved.................")
 
-# nb = summarize_by_class(X_train)
-# y_pred = predict(nb, X_test)
-#
-# print("Custom NB score :", accuracy_score(y_test, y_pred) * 100)
+
+# Predicting using the saved model
+def predict_load_model(X_test, plot=True):
+    clf = load('model/knn_model_inbuilt_k_19.joblib')
+    predictions = clf.predict(X_test)
+
+    if plot:
+        plot_confusion_matrix(clf, X_test, predictions)
+        plt.show()
+    return predictions
+
+# train_model()
+# y_pred = predict_load_model(X_test, plot=True)
+# print(accuracy_score(y_test, y_pred))
