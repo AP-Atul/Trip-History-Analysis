@@ -2,7 +2,7 @@
 Data Analysis on 'Captial Bikeshare : A bike sharing service in the United States'
 
 ## Instructions to run
-
+(requires python 3+)
 1. Install all libraries using(requirements file) : pip3 install -r requirements.txt
 2. Run the ui.py file
 
