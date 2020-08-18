@@ -36,6 +36,16 @@ def predict_load_model(X_test, plot=True):
         plt.show()
     return predictions
 
+
+def controller_predict(controller, test_data, test_labels, plot=True):
+    clf = load('model/knn_model_inbuilt_k_19.joblib')
+    predictions = clf.predict(test_data)
+    if plot:
+        plot_confusion_matrix(clf, test_data, predictions)
+        plt.show()
+
+    controller.setKNNInbuilt(round(accuracy_score(test_labels, predictions) * 100, 3))
+
 # train_model()
 # ypred = predict_load_model(X_test, plot=False)
 # print(accuracy_score(y_test, ypred))

@@ -26,9 +26,15 @@ def train():
 
 # Predicting using the saved model
 def prediction(test_data):
-    clf = load('model/knn_model_inbuilt_k_19.joblib')
+    clf = load('model/knn_model_custom_train_k_5.joblib')
     predictions = clf.predict(test_data)
     return predictions
+
+
+def controller_predict(controller, test_data, test_labels):
+    clf = load('model/knn_model_inbuilt_k_19.joblib')
+    predictions = clf.predict(test_data)
+    controller.setKNNCustom(round(accuracy_score(test_labels, predictions) * 100, 3))
 
 # train()
 # y_pred = prediction(X_test)

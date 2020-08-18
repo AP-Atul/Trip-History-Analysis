@@ -1,6 +1,11 @@
 # Trip-History-Analysis
 Data Analysis on 'Captial Bikeshare : A bike sharing service in the United States'
 
+
+## Screen
+
+![screen](https://github.com/AP-Atul/Trip-History-Analysis/blob/master/charts/window.png)
+
 ## Few Notes
 The data includes:
 

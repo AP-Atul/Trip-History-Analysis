@@ -30,6 +30,13 @@ def prediction(data):
     predictions = model.predict(data)
     return predictions
 
+
+def controller_predict(controller, test_data, test_labels):
+    clf = load('model/nb_model_custom.joblib')
+    predictions = clf.predict(test_data)
+
+    controller.setNBCustom(round(accuracy_score(test_labels, predictions) * 100, 3))
+
 # train()
 # y_pred = prediction(X_test)
 # print(accuracy_score(y_test, y_pred))

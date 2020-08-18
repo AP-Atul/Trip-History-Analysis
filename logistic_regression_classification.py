@@ -35,6 +35,16 @@ def prediction(data, plot=True):
         plt.show()
     return predictions
 
+
+def controller_predict(controller, test_data, test_labels, plot=True):
+    clf = load('model/lr_model_inbuilt.joblib')
+    predictions = clf.predict(test_data)
+    if plot:
+        plot_confusion_matrix(clf, test_data, predictions)
+        plt.show()
+
+    controller.setLRInbuilt(round(accuracy_score(test_labels, predictions) * 100, 3))
+
 # train()
 # y_pred = prediction(X_test)
 # print(accuracy_score(y_test, y_pred))
