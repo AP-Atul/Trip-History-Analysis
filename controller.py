@@ -2,12 +2,9 @@ import numpy as np
 from pandas import read_csv
 from sklearn.model_selection import train_test_split
 
-import custom_knn_classification
-import custom_logistic_regression_classification
-import custom_naive_bayes_classification
-import knn_classification
-import logistic_regression_classification
-import naivebayes_classification
+from custom import custom_logistic_regression_classification, custom_naive_bayes_classification, \
+    custom_knn_classification
+from inbuilt import naivebayes_classification, logistic_regression_classification, knn_classification
 from visualize_data import Visualize
 
 df = read_csv("processed_dataset/2018_01_02_preprocessed.csv")
