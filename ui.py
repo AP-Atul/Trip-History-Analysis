@@ -15,8 +15,21 @@ Pro tip: Use Ctrl + D to change the theme ;)
 
 
 class App(QWidget):
+    """
+    Initial class to create an UI with several components like layouts, labels, buttons, etc
+    """
 
     def __init__(self):
+        """
+        Class to initiate the UI for the  running of algorithms
+
+        It uses following algorithms
+            - K Nearest Neighbours
+            - Logistic Regression
+            - Naive Bayes
+
+        Both custom and sklearn's implementations are provided.
+        """
         global dark
         super().__init__()
 
@@ -207,43 +220,104 @@ class App(QWidget):
         self.setLayout(mainLayout)
 
     def visualize(self):
+        """
+        Calling plot function inside `Visualize` class
+        """
         self.controller.plot_dataframe()
         return
 
     def KNN(self):
+        """
+        Calling KNN from Controller class
+        """
         self.controller.callKNNs()
 
     def NB(self):
+        """
+        Calling NB from Controller class
+        """
         self.controller.callNBs()
 
     def LR(self):
+        """
+        Calling LR from Controller class
+        """
         self.controller.callLRs()
 
     def setKNNInbuilt(self, text):
+        """
+        Setting values of calculated accuracy by the SKlearn KNN
+        Parameters
+        ----------
+        text : str
+            accuracy from the model (pre-trained and saved)
+        """
         self.knnInbuiltLabel.setText(text)
 
     def setKNNCustom(self, text):
+        """
+        Setting values of calculated accuracy by the Custom KNN
+        Parameters
+        ----------
+        text : str
+            accuracy from the model (pre-trained and saved)
+        """
         self.knnCustomLabel.setText(text)
 
     def setNBInbuilt(self, text):
+        """
+        Setting values of calculated accuracy by the SKlearn Naive Bayes
+        Parameters
+        ----------
+        text : str
+            accuracy from the model (pre-trained and saved)
+        """
         self.nbInbuiltLabel.setText(text)
 
     def setNBCustom(self, text):
+        """
+        Setting values of calculated accuracy by the Custom Naive Bayes
+        Parameters
+        ----------
+        text : str
+            accuracy from the model (pre-trained and saved)
+        """
         self.nbCustomLabel.setText(text)
 
     def setLRInbuilt(self, text):
+        """
+        Setting values of calculated accuracy by the SKlearn Logistic Regression
+        Parameters
+        ----------
+        text : str
+            accuracy from the model (pre-trained and saved)
+        """
         self.lrInbuiltLabel.setText(text)
 
     def setLRCustom(self, text):
+        """
+        Setting values of calculated accuracy by the Custom Logistic Regression
+        Parameters
+        ----------
+        text : str
+            accuracy from the model (pre-trained and saved)
+        """
         self.lrCustomLabel.setText(text)
 
     def compare(self):
+        """
+        Gets sorted dictionary of all performed model from Controller and creating comparison
+        """
         details = self.controller.compare()
         self.comparisonDetails.setText(details[0][0] + " > " +
                                        details[1][0] + " > " +
                                        details[2][0])
 
     def changeTheme(self):
+        """
+        Change the theme of the UI. Settings are saved in settings,prop
+        `Press Ctrl + D`
+        """
         dump(not dark, "settings.prop")
         self.__init__()
 
