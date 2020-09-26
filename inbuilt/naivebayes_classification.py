@@ -39,7 +39,7 @@ def controller_predict(controller, test_data, test_labels, plot=True):
     clf = load('model/nb_model_inbuilt.joblib')
     predictions = clf.predict(test_data)
     if plot:
-        plot_confusion_matrix(clf, test_data, predictions)
+        plot_confusion_matrix(clf, test_data, test_labels)
         plt.show()
 
     controller.setNBInbuilt(round(accuracy_score(test_labels, predictions) * 100, 3))

@@ -42,7 +42,7 @@ def controller_predict(controller, test_data, test_labels, plot=True):
     predictions = clf.predict(test_data)
     
     if plot:
-        plot_confusion_matrix(clf, test_data, predictions)
+        plot_confusion_matrix(clf, test_data, test_labels)
         plt.show()
 
     controller.setKNNInbuilt(round(accuracy_score(test_labels, predictions) * 100, 3))
